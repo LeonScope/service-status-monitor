@@ -2,15 +2,15 @@
 
 [Overview](../README.md) · [Deutsch](CASE-STUDY.de.md) · [Verification](VERIFICATION.md)
 
-## Problem and outcome
+## Why one failed request does not open an incident
 
-An HTTP failure is an observation, not necessarily an outage. A useful monitoring tool needs to preserve evidence, show uncertainty and make status changes understandable. Scope Monitor implements that workflow in a small local application: checks, confirmation, incident history and recovery, with explicit controls for pause, manual checks and export.
+An HTTP request can fail even though the service responds again shortly afterward. Scope Monitor records each check but waits for two consecutive failures before opening an incident. Recovery also needs two expected responses in a row.
 
-The first version is complete as a locally verified portfolio project. It is not a managed monitoring service. Source code and implementation history remain private.
+The history shows the observations and the resulting status changes. Services can be checked manually, paused and resumed. The application runs locally and is not offered as a managed monitoring service.
 
 ## The main decisions
 
-| Decision | Reason and observable behavior |
+| Decision | Why it works this way |
 | --- | --- |
 | Confirm with two consecutive checks | One transient failure does not open an incident. Two failures open one incident and one journal entry; two expected responses resolve it once. |
 | Preserve unknown outcomes | Policy-blocked or internally failed checks do not become successful observations. Unknown results break confirmation streaks and never resolve an open incident. |
@@ -44,14 +44,14 @@ The history chart uses actual sample timestamps and leaves missing responses and
 
 ## Scope and limitations
 
-The local server must stay running; no operating-system background service is installed. A sleeping or stopped computer produces gaps. The browser is not the scheduler. DNS failures and TLS errors are observations from this machine and do not establish a global outage.
+The local server must stay running; no operating-system background service is installed. A sleeping or stopped computer produces gaps. Closing the browser does not affect scheduled checks. DNS failures and TLS errors are observations from this machine and do not establish a global outage.
 
 The application allows up to 20 monitors. Check history is capped at 2,000 samples per monitor, with data older than seven days pruned on subsequent recording. Closed incident history and the local event journal are also bounded. No authenticated endpoints, custom ports, browser transactions, distributed probes, email delivery or external incident-management integration are included.
 
 This application measures time to response headers, including DNS, TLS and redirects. It does not measure full page load, application correctness, certificate expiry or duration-based uptime. The synthetic example's percentages and timings are not performance claims.
 
-## Role and evidence
+## My role and the use of AI
 
-LeonScope commissioned the project and selected the portfolio and privacy constraints. Codex generated the implementation, design, tests and documentation and performed the recorded verification. The project demonstrates AI-assisted product development and testable monitoring behavior; it does not claim an independently hand-written implementation or AI inference inside the product.
+I selected the service monitor for my portfolio and guided its scope. Codex generated the application, design, tests and documentation and ran the checks. The monitor itself does not use an AI model.
 
-[72 application tests and eight browser workflows](VERIFICATION.md) passed in a fresh local installation. The public material includes the scope and results, not the private source needed to rerun those tests.
+[72 application tests and eight browser workflows](VERIFICATION.md) passed after a clean installation and again after the interface revision. The report records the environment and dates for each run. Source code remains private.

@@ -1,29 +1,29 @@
 # Scope Monitor
 
-**BEOBACHTEN → BESTÄTIGEN → ERHOLUNG ERKENNEN**
+### HTTP-Dienste prüfen und Störungen nachvollziehen
 
-Eine lokale Betriebsübersicht für HTTP-Dienste. Antwortverläufe verfolgen, Störungen untersuchen und die bestätigte Erholung nachvollziehen. Ein Portfolioprojekt von **[LeonScope](https://github.com/LeonScope)** mit KI-Unterstützung.
+Scope Monitor prüft in regelmäßigen Abständen, ob HTTP-Dienste antworten. Die Übersicht zeigt den letzten Status und die bisherigen Antwortzeiten. Schlagen zwei Prüfungen hintereinander fehl, wird eine Störung angelegt. Zwei erwartete Antworten in Folge bestätigen, dass der Dienst wieder antwortet.
 
 [English](README.md) · [Technische Fallstudie](docs/CASE-STUDY.de.md) · [Prüfergebnisse](docs/VERIFICATION.de.md)
 
 ![Scope Monitor als Betriebsübersicht mit sechs erfundenen Diensten und ausdrücklich simulierten Beobachtungen](assets/dashboard-desktop.png)
 
-## Eine Störung von der ersten Beobachtung an verfolgen
+## Wann eine Störung entsteht
 
-| Folge | Gespeichertes Verhalten |
+| Prüfung | Was passiert |
 | :--- | :--- |
 | Erste fehlgeschlagene Prüfung | Fehler im Verlauf aufbewahren. |
 | Zweiter aufeinanderfolgender Fehler | Eine bestätigte Störung und einen lokalen Protokolleintrag anlegen. |
 | Erste erwartete Antwort | Antwort speichern; die Störung bleibt offen. |
 | Zweite aufeinanderfolgende erwartete Antwort | Erholung bestätigen und die Störung einmalig schließen. |
 
-Unbekannte Ergebnisse unterbrechen die Bestätigungsfolge. Der Verlauf trennt den ersten beobachteten Fehler vom Zeitpunkt seiner Bestätigung. Das sind einzelne Beobachtungen, kein Nachweis exakter Ausfallgrenzen.
+Ein unbekanntes Ergebnis unterbricht die Folge. Im Verlauf steht deshalb sowohl der erste beobachtete Fehler als auch der Zeitpunkt der Bestätigung. Wann der Ausfall tatsächlich begonnen hat, lässt sich aus einzelnen Prüfungen nicht genau bestimmen.
 
 ![Störungsansicht mit getrennten Zeitpunkten für ersten Fehler, Bestätigung und Erholung](assets/incidents-desktop.png)
 
-## Eine Oberfläche für Zustandsänderungen
+## Mit dem Monitor arbeiten
 
-Die dunkelblaue Übersicht verwendet Cyan für Bedienelemente und Grün, Gelb sowie Rot für Ergebnisse. Kompakte Messfelder, ausgerichtete Zahlen und die hervorgehobene Zahl offener Störungen erleichtern den Überblick. Fehlende Antworten bleiben als Lücken im Verlauf erkennbar.
+Die Übersicht zeigt erreichbare, langsame, fehlerhafte, unbekannte und pausierte Dienste getrennt. Ein Klick auf einen Dienst öffnet seine Messwerte und Prüfregeln. Fehlt eine Antwort, bleibt im Diagramm eine Lücke.
 
 - **Einrichten:** öffentliche HTTP(S)-Adresse, erwarteter Status, Antwortzeitgrenze und Intervalle von einer, fünf oder fünfzehn Minuten.
 - **Bedienen:** manuelle Prüfung, Pause/Fortsetzung, JSON-/CSV-Export und bestätigte Löschung einschließlich Verlauf.
@@ -37,20 +37,20 @@ Die dunkelblaue Übersicht verwendet Cyan für Bedienelemente und Grün, Gelb so
 
 </details>
 
-## Technischer Nachweis
+## Umsetzung und Tests
 
 **TypeScript · React · Node.js · SQLite · Vite**
 
-**72 Anwendungstests und acht Browserabläufe am 19. Oktober 2026 erneut bestanden.** Die frühere Prüfung nach frischer Installation und der gesonderte echte HTTP-Abruf bleiben mit ihrem Datum im [Prüfbericht](docs/VERIFICATION.de.md) erhalten.
+Am 19. Oktober 2026 bestanden erneut **72 Anwendungstests und acht Browserabläufe**. Im [Prüfbericht](docs/VERIFICATION.de.md) stehen die einzelnen Testbereiche sowie die Neuinstallation und der separate echte HTTP-Abruf vom 18. Oktober.
 
-Gemeinsam gespeicherte Störungswechsel, zeitlich begrenzte Sperren pro Monitor und Abbruch verhindern überlappende oder veraltete Ergebnisse im Verlauf. Anfragen kontrollieren DNS-Antworten, binden Verbindungen an eine geprüfte Adresse und prüfen Weiterleitungen erneut. [Architektur und Entscheidungen](docs/CASE-STUDY.de.md).
+Messwert, Störungswechsel und Protokolleintrag werden gemeinsam gespeichert. Eine laufende Prüfung darf nach dem Pausieren oder Löschen eines Monitors keine veralteten Ergebnisse mehr eintragen. Auch DNS-Adressen und Weiterleitungen werden vor dem Abruf geprüft. Die [Fallstudie](docs/CASE-STUDY.de.md) erklärt diese Entscheidungen genauer.
 
-LeonScope legte Portfolioziel und Schutz des Quellcodes fest. Codex schlug Umfang und Technik vor, erzeugte Implementierung, Oberfläche und Tests, führte die dokumentierten Prüfungen aus und erstellte die Präsentation. Die Anwendung selbst ruft kein KI-Modell auf.
+Ich habe das Projekt als nächsten Baustein meines Portfolios ausgewählt und den Umfang begleitet. Codex erstellte die Umsetzung, Oberfläche, Tests und Dokumentation und führte die Prüfungen aus. Der Monitor selbst arbeitet ohne KI-Modell.
 
-## Betriebsgrenzen
+## Lokaler Betrieb
 
-Der **lokale Server** führt Prüfungen aus, solange er läuft; ein geschlossener Browser stoppt ihn nicht. Ausgefallene Prüfungen werden nicht nachträglich erfunden. Erfolgsanteile beschreiben gespeicherte Einzelmessungen und keine zeitbasierte Verfügbarkeit. Ereignisse bleiben im lokalen Protokoll; E-Mails, Webhooks oder Chatnachrichten werden nicht versendet.
+Die Prüfungen laufen auf dem **lokalen Server**. Der Browser kann dabei geschlossen sein. Ist der Server ausgeschaltet, entstehen keine Messungen; diese Lücken werden später auch nicht aufgefüllt. Der angezeigte Erfolgsanteil bezieht sich auf gespeicherte Prüfungen, nicht auf die gesamte Betriebszeit. Meldungen bleiben im lokalen Protokoll. E-Mail-, Webhook- und Chatbenachrichtigungen sind nicht eingebaut.
 
 Die Screenshots enthalten simulierte Antwortzeiten, Prozentwerte und Störungen. Es gibt keinen gehosteten 24/7-Dienst, keine öffentliche Anwendungs-CI und keinen ausführbaren Download.
 
-**Dieses Repository enthält nur Präsentationsmaterial. Der Anwendungscode bleibt privat.** Es wird keine Open-Source-Lizenz, Creative-Commons-Lizenz oder allgemeine Erlaubnis zur Weiterverwendung des eigenen Materials erteilt. Gesetzliche Rechte, GitHubs Bedingungen und Rechte Dritter bleiben unberührt. [Rechtehinweis](RIGHTS.md).
+**Hier wird nur das Projekt vorgestellt. Der Anwendungscode bleibt privat.** Für das eigene Material wird keine Open-Source- oder Creative-Commons-Lizenz und keine allgemeine Nutzungserlaubnis erteilt. [Rechtehinweis](RIGHTS.md).

@@ -2,15 +2,15 @@
 
 [Übersicht](../README.de.md) · [English](CASE-STUDY.md) · [Prüfergebnisse](VERIFICATION.de.md)
 
-## Problem und Ergebnis
+## Warum ein einzelner Fehler noch keine Störung ist
 
-Eine fehlgeschlagene HTTP-Anfrage ist zunächst eine Beobachtung. Ein hilfreicher Monitor bewahrt diese Beobachtung auf, macht Unsicherheit sichtbar und erklärt Zustandswechsel. Scope Monitor setzt diesen Ablauf in einer kleinen lokalen Anwendung um: Prüfung, Bestätigung, Störungsverlauf und Erholung – mit Funktionen zum Pausieren, manuellen Prüfen und Exportieren.
+Eine HTTP-Anfrage kann scheitern, obwohl der Dienst kurz danach wieder antwortet. Scope Monitor speichert deshalb jede Prüfung, eröffnet eine Störung aber erst nach zwei aufeinanderfolgenden Fehlern. Auch die Erholung muss durch zwei erwartete Antworten bestätigt werden.
 
-Die erste Version ist als lokal geprüftes Portfolioprojekt fertiggestellt. Sie wird nicht als betreuter Monitoringdienst betrieben. Quellcode und Implementierungshistorie bleiben privat.
+Der Verlauf zeigt die einzelnen Beobachtungen und die daraus entstandenen Zustandswechsel. Dienste lassen sich manuell prüfen, pausieren und wieder fortsetzen. Die Anwendung läuft lokal; sie wird nicht als betreuter Monitoringdienst angeboten.
 
 ## Zentrale Entscheidungen
 
-| Entscheidung | Grund und sichtbares Verhalten |
+| Entscheidung | Begründung |
 | --- | --- |
 | Zwei Prüfungen zur Bestätigung | Ein einzelner Fehler eröffnet keine Störung. Zwei Fehler erzeugen eine Störung und einen Protokolleintrag; zwei erwartete Antworten bestätigen einmalig die Erholung. |
 | Unbekannte Ergebnisse erhalten | Durch die Zielprüfung blockierte oder intern fehlgeschlagene Prüfungen werden nicht als Erfolg gewertet. Unbekannte Ergebnisse unterbrechen die Bestätigungsfolge und schließen keine offene Störung. |
@@ -44,14 +44,14 @@ Der Verlauf verwendet die tatsächlichen Messzeitpunkte und verbindet fehlende A
 
 ## Umfang und Grenzen
 
-Der lokale Server muss laufen; es wird kein Hintergrunddienst im Betriebssystem installiert. Ein ausgeschalteter oder schlafender Rechner erzeugt Messlücken. Der Browser übernimmt die Zeitplanung nicht. DNS- und TLS-Fehler sind Beobachtungen dieses Rechners und beweisen keinen weltweiten Ausfall.
+Der lokale Server muss laufen; es wird kein Hintergrunddienst im Betriebssystem installiert. Ein ausgeschalteter oder schlafender Rechner erzeugt Messlücken. Ein geschlossener Browser hat dagegen keinen Einfluss auf die Prüfungen. DNS- und TLS-Fehler sind Beobachtungen dieses Rechners und beweisen keinen weltweiten Ausfall.
 
 Bis zu 20 Monitore sind möglich. Pro Monitor werden höchstens 2.000 Prüfungen gespeichert; Einträge älter als sieben Tage werden beim Speichern weiterer Messungen entfernt. Auch abgeschlossene Störungen und Ereignisse werden begrenzt aufbewahrt. Authentifizierte Endpunkte, eigene Ports, Browsertransaktionen, verteilte Messpunkte, E-Mail-Versand und externe Störungsmanagementsysteme gehören nicht zu dieser Version.
 
 Gemessen wird die Zeit bis zu den HTTP-Antwortheadern einschließlich DNS, TLS und Weiterleitungen. Vollständige Seitenladezeit, fachliche Korrektheit einer Anwendung, Zertifikatsablauf und zeitbasierte Verfügbarkeit werden nicht ermittelt. Prozentwerte und Antwortzeiten des Beispiels sind keine Leistungsnachweise.
 
-## Rolle und Nachweise
+## Mein Anteil und die KI-Unterstützung
 
-LeonScope beauftragte das Projekt und legte Portfolioziel und Schutz des Quellcodes fest. Codex erzeugte Implementierung, Gestaltung, Tests und Dokumentation und führte die protokollierten Prüfungen aus. Das Projekt zeigt KI-unterstützte Produktentwicklung und prüfbares Monitoringverhalten. Es beansprucht weder eine vollständig ohne KI geschriebene Implementierung noch KI-Inferenz innerhalb der Anwendung.
+Ich habe den Service-Monitor für mein Portfolio ausgewählt und den Umfang der Umsetzung begleitet. Codex erstellte Anwendung, Gestaltung, Tests und Dokumentation und führte die Prüfungen aus. Der Monitor selbst verwendet kein KI-Modell.
 
-[72 Anwendungstests und acht Browserabläufe](VERIFICATION.de.md) bestanden in einer frischen lokalen Installation. Öffentlich sind Prüfumfang und Ergebnisse; der zum Wiederholen der Tests erforderliche Anwendungscode bleibt privat.
+[72 Anwendungstests und acht Browserabläufe](VERIFICATION.de.md) bestanden nach einer frischen Installation und erneut nach der Überarbeitung der Oberfläche. Die Prüfumgebung und die Termine der Testläufe stehen im Bericht. Der Quellcode bleibt privat.

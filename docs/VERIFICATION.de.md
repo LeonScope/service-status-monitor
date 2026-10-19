@@ -6,11 +6,11 @@
 
 Privater Anwendungsstand: `3fbd2706b285b5551468a8b567458cb496116d2d`. Dunkle Betriebsübersicht, besser lesbare Statusfarben, ein Tastatursprung zum Inhalt und korrigierter Hinweis: Die Prüfungen hängen vom lokalen Server ab, nicht von einem geöffneten Browser.
 
-**72 Anwendungstests und 8 Browserabläufe bestanden**, ohne Fehler, übersprungene Tests oder Browser-Wiederholungsversuche. TypeScript-Prüfung und Produktionsbuild bestanden. Die Abläufe umfassen Desktop- und Smartphone-Ansichten bei 390 Pixeln; die Screenshots wurden aus diesem Stand erneuert und visuell geprüft.
+**72 Anwendungstests und 8 Browserabläufe bestanden**, ohne Fehler, übersprungene Tests oder Browser-Wiederholungsversuche. TypeScript-Prüfung und Produktionsbuild bestanden. Die Browsertests umfassen Desktop-Ansichten und eine Smartphone-Darstellung bei 390 Pixeln. Die neuen Screenshots stammen aus dieser Version und wurden visuell geprüft.
 
-Die Prüfungen liefen lokal auf dem überarbeiteten privaten Anwendungsstand mit getrennten Testdatenbanken. Bereits installierte Abhängigkeiten wurden wiederverwendet und nicht neu installiert. Abhängigkeitslisten und Lockfiles sind unverändert. Für diese Oberflächenrevision wird kein neuer echter HTTP-Messwert, keine erneute Abhängigkeitswarnprüfung und keine frische Installation der Abhängigkeiten behauptet.
+Die Prüfungen liefen lokal auf dem überarbeiteten privaten Anwendungsstand mit getrennten Testdatenbanken. Bereits installierte Abhängigkeiten wurden wiederverwendet und nicht neu installiert. Abhängigkeitslisten und Lockfiles blieben unverändert. Eine erneute Installation, eine neue Prüfung auf bekannte Paket-Schwachstellen und eine weitere echte externe HTTP-Messung gehörten nicht zu diesem Lauf.
 
-Die folgenden Nachweise behalten ihr ursprüngliches Datum und ihren Prüfumfang.
+Die frühere Installation und der damalige Testlauf sind unten mit ihrem ursprünglichen Datum dokumentiert.
 
 ## Frühere vollständige Prüfung — 18. Oktober 2026
 
@@ -44,7 +44,7 @@ Die automatisierten Tests verwenden kontrollierte Testdaten. Der echte HTTP-Abru
 
 Die Screenshots zeigen sechs fiktive Dienste und erzeugte Verläufe. Antwortzeiten, Erfolgsanteile und Störungen sind simuliert. Unbekannte und fehlende Messungen werden nicht als Erfolge gezählt. Das lokale Ereignisprotokoll verschickt keine Benachrichtigungen außerhalb der Anwendung.
 
-Es wird kein dauerhafter öffentlicher Betrieb, keine Produktionsfreigabe, vollständige Barrierefreiheit, umfassende Browserunterstützung oder Sicherheitszertifizierung behauptet. Die Prüfungen sind begrenzte technische Nachweise und kein unabhängiger Penetrationstest. Ohne den privaten Anwendungscode und seine Abhängigkeiten lassen sich die Anwendungstests aus diesem Präsentationsrepository nicht wiederholen.
+Dauerhafter öffentlicher Betrieb, Produktionslast, vollständige Barrierefreiheit und eine breite Browserauswahl wurden nicht geprüft. Eine Sicherheitszertifizierung oder ein unabhängiger Penetrationstest hat nicht stattgefunden. Für eine Wiederholung der Anwendungstests wären der private Quellcode und seine Abhängigkeiten erforderlich; beides ist hier nicht enthalten.
 
 ## Umgebung und Herkunft der Screenshots
 

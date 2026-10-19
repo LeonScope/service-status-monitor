@@ -6,11 +6,11 @@
 
 Private application revision: `3fbd2706b285b5551468a8b567458cb496116d2d`. Dark operations console, more legible status colors, a keyboard skip link and corrected text explaining that checks depend on the local server rather than an open browser.
 
-**72 application tests and 8 browser workflows passed**, with no failures, skips or browser retries. TypeScript checking and the production build passed. The workflows include desktop and 390-pixel mobile views; screenshots were visually reviewed and refreshed from this source.
+**72 application tests and 8 browser workflows passed**, with no failures, skips or browser retries. TypeScript checking and the production build passed. The browser tests cover desktop views and a 390-pixel mobile layout. The updated screenshots were captured from this version and visually reviewed.
 
-Checks ran locally against the revised private application with isolated test databases. Existing installed dependencies were reused; they were not reinstalled. Dependency manifests and lockfiles are unchanged. No new live HTTP measurement, dependency advisory scan or fresh dependency installation is claimed for this interface revision.
+Checks ran locally against the revised private application with isolated test databases. Existing installed dependencies were reused; they were not reinstalled. Dependency manifests and lockfiles are unchanged. This round did not include another dependency installation, vulnerability advisory check or real external HTTP measurement.
 
-The checks below retain their original date and scope.
+The earlier installation and test run are recorded below with their original date.
 
 ## Earlier full verification — 18 October 2026
 
@@ -38,15 +38,15 @@ Verified on **18 October 2026** against private application revision `3f81217815
 
 **API and interface:** create/check/pause/resume/delete, explicit monitoring permission, Host/Origin/cross-site checks, input limits, live/example separation, source-file exclusion, JSON/CSV export and spreadsheet-formula escaping. Eight browser workflows cover workspace switching, incident confirmation and recovery, local events, reload persistence, pause/resume, export downloads, delete confirmation and Escape, blocked-target feedback, mobile layouts and inert rendering of untrusted labels.
 
-## What the evidence does not claim
+## Limits of these results
 
 Automated tests use controlled fixtures; the real HTTP request is separate and was performed once. The 350 ms result is an observation from this environment, not a benchmark, load test or availability guarantee. No persistent real monitor was created for that check.
 
 The screenshots show six fictional services and generated history. Their response times, success ratios and incidents are synthetic. Unknown and absent measurements are not counted as successes. The local event journal sends no notifications outside the application.
 
-There is no claim of continuous public operation, production readiness, complete accessibility compliance, broad browser coverage or security certification. Network and application checks are scoped engineering verification, not an independent penetration test. The public repository cannot reproduce private application tests because it does not contain the code or dependencies.
+The tests do not cover continuous public operation, production load, a full accessibility audit or broad browser compatibility. No security certification or independent penetration test has been carried out. Repeating the application tests requires the private source and dependencies, which are not included here.
 
-## Environment and screenshot provenance
+## Environment and screenshots
 
 macOS 26.6 · Node.js 24.19.0 · npm 11.17.0 · Chrome 155.0.8059.84 · TypeScript 5.x · React 19.2.0 · Vite 8.3.4 · Playwright 1.64.1.
 
