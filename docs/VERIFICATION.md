@@ -2,6 +2,18 @@
 
 [Overview](../README.md) · [Deutsch](VERIFICATION.de.md)
 
+## Interface review — 19 October 2026
+
+Private application revision: `3fbd2706b285b5551468a8b567458cb496116d2d`. Dark operations console, more legible status colors, a keyboard skip link and corrected text explaining that checks depend on the local server rather than an open browser.
+
+**72 application tests and 8 browser workflows passed**, with no failures, skips or browser retries. TypeScript checking and the production build passed. The workflows include desktop and 390-pixel mobile views; screenshots were visually reviewed and refreshed from this source.
+
+Checks ran locally against the revised private application with isolated test databases. Existing installed dependencies were reused; they were not reinstalled. Dependency manifests and lockfiles are unchanged. No new live HTTP measurement, dependency advisory scan or fresh dependency installation is claimed for this interface revision.
+
+The checks below retain their original date and scope.
+
+## Earlier full verification — 18 October 2026
+
 Verified on **18 October 2026** against private application revision `3f81217815d5f5011ef26bae9db87f8f9b97dea0`. Final checks ran in a fresh local Git clone with a clean lockfile installation and isolated test databases.
 
 | Check | Observed result |
@@ -38,4 +50,4 @@ There is no claim of continuous public operation, production readiness, complete
 
 macOS 26.6 · Node.js 24.19.0 · npm 11.17.0 · Chrome 155.0.8059.84 · TypeScript 5.x · React 19.2.0 · Vite 8.3.4 · Playwright 1.64.1.
 
-Screenshots were captured by the passing browser workflows in the fresh copy and visually reviewed. Desktop captures use a 1440-pixel-wide viewport; mobile uses 390 pixels. The presentation contains no source, build output, database, credentials, dependency bundle or source archive.
+Current screenshots come from the 19 October interface review described above. Desktop captures use a 1440-pixel-wide viewport; mobile uses 390 pixels. The presentation contains no source, build output, database, credentials, dependency bundle or source archive.

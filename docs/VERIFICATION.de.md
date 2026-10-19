@@ -2,6 +2,18 @@
 
 [Übersicht](../README.de.md) · [English](VERIFICATION.md)
 
+## Oberflächenprüfung — 19. Oktober 2026
+
+Privater Anwendungsstand: `3fbd2706b285b5551468a8b567458cb496116d2d`. Dunkle Betriebsübersicht, besser lesbare Statusfarben, ein Tastatursprung zum Inhalt und korrigierter Hinweis: Die Prüfungen hängen vom lokalen Server ab, nicht von einem geöffneten Browser.
+
+**72 Anwendungstests und 8 Browserabläufe bestanden**, ohne Fehler, übersprungene Tests oder Browser-Wiederholungsversuche. TypeScript-Prüfung und Produktionsbuild bestanden. Die Abläufe umfassen Desktop- und Smartphone-Ansichten bei 390 Pixeln; die Screenshots wurden aus diesem Stand erneuert und visuell geprüft.
+
+Die Prüfungen liefen lokal auf dem überarbeiteten privaten Anwendungsstand mit getrennten Testdatenbanken. Bereits installierte Abhängigkeiten wurden wiederverwendet und nicht neu installiert. Abhängigkeitslisten und Lockfiles sind unverändert. Für diese Oberflächenrevision wird kein neuer echter HTTP-Messwert, keine erneute Abhängigkeitswarnprüfung und keine frische Installation der Abhängigkeiten behauptet.
+
+Die folgenden Nachweise behalten ihr ursprüngliches Datum und ihren Prüfumfang.
+
+## Frühere vollständige Prüfung — 18. Oktober 2026
+
 Geprüft am **18. Oktober 2026** gegen die private Anwendungsversion `3f81217815d5f5011ef26bae9db87f8f9b97dea0`. Die abschließenden Prüfungen liefen in einer frischen lokalen Git-Kopie mit neu installierten, festgeschriebenen Abhängigkeiten und getrennten Testdatenbanken.
 
 | Prüfung | Beobachtetes Ergebnis |
@@ -38,4 +50,4 @@ Es wird kein dauerhafter öffentlicher Betrieb, keine Produktionsfreigabe, volls
 
 macOS 26.6 · Node.js 24.19.0 · npm 11.17.0 · Chrome 155.0.8059.84 · TypeScript 5.x · React 19.2.0 · Vite 8.3.4 · Playwright 1.64.1.
 
-Die Screenshots entstanden durch die bestandenen Browserabläufe in der frischen Kopie und wurden visuell geprüft. Desktopaufnahmen verwenden ein 1440 Pixel breites Ansichtsfenster, die mobile Aufnahme 390 Pixel. Die Präsentation enthält keine Quellen, Build-Dateien, Datenbank, Zugangsdaten, Abhängigkeitspakete oder Quellcodearchive.
+Die aktuellen Screenshots stammen aus der oben beschriebenen Oberflächenprüfung vom 19. Oktober. Desktopaufnahmen verwenden ein 1440 Pixel breites Ansichtsfenster, die mobile Aufnahme 390 Pixel. Die Präsentation enthält keine Quellen, Build-Dateien, Datenbank, Zugangsdaten, Abhängigkeitspakete oder Quellcodearchive.

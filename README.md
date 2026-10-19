@@ -1,42 +1,56 @@
-# Scope Monitor · Service Status Monitor
+# Scope Monitor
 
-**A project presentation by [LeonScope](https://github.com/LeonScope)**  
-Full-Stack Developer · AI-Assisted Product Builder
+**OBSERVE → CONFIRM → RECOVER**
 
-[Deutsch](README.de.md) · [Case study](docs/CASE-STUDY.md) · [Verification](docs/VERIFICATION.md)
+A local operations console for HTTP services. Follow response history, investigate an incident and see when recovery was confirmed. An AI-assisted portfolio project by **[LeonScope](https://github.com/LeonScope)**.
 
-See how services respond, follow their check history and trace an incident through confirmed recovery. Scope Monitor combines scheduled HTTP checks, persistent observations and a responsive dashboard. **Application source remains private.** This repository contains presentation material only.
+[Deutsch](README.de.md) · [Engineering case study](docs/CASE-STUDY.md) · [Verification record](docs/VERIFICATION.md)
 
-![Scope Monitor desktop dashboard with explicitly marked synthetic services and observations](assets/dashboard-desktop.png)
+![Scope Monitor operations console with six fictional services and explicitly simulated observations](assets/dashboard-desktop.png)
 
-## What the application does
+## Follow an incident from the first observation
 
-- **Monitor services:** add public HTTP(S) endpoints, choose a one-, five- or fifteen-minute interval, set an expected status and a response-time threshold.
-- **Keep observations honest:** distinguish reachable, slow, failed, unknown and paused states. Show response-header timing, sample-based success ratios and gaps in the history.
-- **Confirm incidents:** two consecutive failed checks open an incident; two consecutive expected responses confirm recovery. A single failure remains visible without opening an incident.
-- **Control the workflow:** run a manual check, pause/resume monitoring, export JSON or CSV and delete a monitor with its history.
-- **Demonstrate without customer data:** a separate example workspace contains six fictional services, simulated samples and selectable failure/recovery scenarios. No example domain is fetched.
+| Sequence | Recorded behavior |
+| :--- | :--- |
+| First failed check | Preserve the failure in the history. |
+| Second consecutive failure | Open one confirmed incident and a local journal entry. |
+| First expected response | Record the response; the incident remains open. |
+| Second consecutive expected response | Confirm recovery and resolve the incident once. |
 
-## Selected views
+Unknown results interrupt the confirmation sequence. The timeline distinguishes the first observed failure from the time it was confirmed. These are sampled observations, not proof of exact outage boundaries.
 
-| Incident history | Mobile dashboard |
-| --- | --- |
-| [![Confirmed incident and recovery with distinct observation timestamps](assets/incidents-desktop.png)](assets/incidents-desktop.png) | <img src="assets/dashboard-mobile.png" width="220" alt="Responsive Scope Monitor dashboard with clearly marked synthetic data"> |
+![Incident view with separate first-failure, confirmation and recovery timestamps](assets/incidents-desktop.png)
 
-## Engineering evidence
+## An interface for observing change
 
-**72 automated application tests and eight browser workflows passed in a fresh local copy.** A clean dependency installation, TypeScript check and production build passed. One separate real request to `https://example.com/` returned HTTP 200 in **350 ms to response headers** in the verification environment. This is one observation, not a benchmark or availability claim. [Verification details](docs/VERIFICATION.md).
+The dark blue console uses cyan for controls and green, amber and red for outcomes. Compact measurements, aligned numbers and a highlighted incident count make the current state easy to scan. Missing responses remain gaps in the history.
 
-Built with **TypeScript, React, Node.js, SQLite and Vite**. Transactional incident transitions, per-monitor leases and cancellation protect the history from overlapping or obsolete results. Requests validate DNS answers, pin the connection to an approved address and revalidate redirects. [Architecture and decisions](docs/CASE-STUDY.md).
+- **Configure:** public HTTP(S) endpoint, expected status, response-time threshold and a one-, five- or fifteen-minute interval.
+- **Operate:** manual check, pause/resume, JSON/CSV export and confirmed deletion with associated history.
+- **Inspect:** response-header timing, sample-based success ratios, stale observations and local events.
+- **Demonstrate:** six fictional services in a separate example workspace, with selectable failure and recovery scenarios. No example address is fetched.
 
-## Role and AI assistance
+<details>
+<summary><strong>Mobile operations view</strong> — services, measurements and controls</summary>
 
-LeonScope set the portfolio objective and the requirement to keep source private. Codex proposed the scope and technology, generated the implementation, interface and tests, ran the documented checks and prepared this presentation. The running application does not call an AI model.
+<img src="assets/dashboard-mobile.png" width="340" alt="Dark mobile Scope Monitor console with simulated service states and monitoring controls" />
 
-## Availability and rights
+</details>
 
-Monitoring runs while the **local server** is running. There is no hosted application or 24/7 monitoring service. Closing only the browser does not stop the local server. Missed checks are not backfilled, and the success ratio describes recorded samples rather than duration-based uptime. Notifications are a **local event journal**; no emails, webhooks or chat messages are sent.
+## Engineering record
 
-The screenshots use synthetic data, including their response times and success ratios. Real HTTP verification is documented separately. This presentation repository does not run application tests on GitHub and does not distribute an executable package.
+**TypeScript · React · Node.js · SQLite · Vite**
 
-**No open-source license or general reuse permission is granted for the original portfolio material.** Applicable law, GitHub's platform terms and third-party rights remain unaffected. [Rights notice](RIGHTS.md).
+**72 application tests and eight browser workflows passed again on 19 October 2026.** The earlier clean-install check and separate real HTTP observation remain dated in the [verification record](docs/VERIFICATION.md).
+
+Transactional incident updates, per-monitor leases and cancellation prevent overlapping or obsolete results from corrupting history. Requests validate DNS answers, pin connections to an approved address and revalidate redirects. [Architecture and decisions](docs/CASE-STUDY.md).
+
+LeonScope set the portfolio objective and private-source requirement. Codex proposed the scope and technology, generated the implementation, interface and tests, performed the documented checks and prepared the presentation. The application itself does not call an AI model.
+
+## Operating boundary
+
+The **local server** performs checks while it is running; closing the browser does not stop it. Missed checks are not backfilled. Success ratios describe recorded samples, not duration-based uptime. Events stay in the local journal; no email, webhook or chat notifications are sent.
+
+Screenshots contain simulated response times, percentages and incidents. There is no hosted 24/7 service, public application CI or executable download.
+
+**This repository contains presentation material only. Application source remains private.** No open-source license, Creative Commons license or general reuse permission is granted for original material. Statutory rights, GitHub terms and third-party rights remain unaffected. [Rights notice](RIGHTS.md).
